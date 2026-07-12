@@ -1,0 +1,225 @@
+{
+  "chosen_threshold": {
+    "threshold": 60,
+    "accuracy": 0.8275482093663912,
+    "precision_dropout": 0.8939544103072349,
+    "recall_dropout": 0.6347642505277973,
+    "f1_dropout": 0.7423868312757201,
+    "confusion_matrix": [
+      [
+        2102,
+        107
+      ],
+      [
+        519,
+        902
+      ]
+    ]
+  },
+  "sweep": [
+    {
+      "threshold": 30,
+      "accuracy": 0.6399449035812672,
+      "precision_dropout": 0.521889400921659,
+      "recall_dropout": 0.956368754398311,
+      "f1_dropout": 0.67527950310559,
+      "confusion_matrix": [
+        [
+          964,
+          1245
+        ],
+        [
+          62,
+          1359
+        ]
+      ]
+    },
+    {
+      "threshold": 35,
+      "accuracy": 0.653168044077135,
+      "precision_dropout": 0.5319905213270142,
+      "recall_dropout": 0.9479239971850809,
+      "f1_dropout": 0.6815077156589932,
+      "confusion_matrix": [
+        [
+          1024,
+          1185
+        ],
+        [
+          74,
+          1347
+        ]
+      ]
+    },
+    {
+      "threshold": 40,
+      "accuracy": 0.6603305785123967,
+      "precision_dropout": 0.5379338175948345,
+      "recall_dropout": 0.9380717804363125,
+      "f1_dropout": 0.6837650679661451,
+      "confusion_matrix": [
+        [
+          1064,
+          1145
+        ],
+        [
+          88,
+          1333
+        ]
+      ]
+    },
+    {
+      "threshold": 45,
+      "accuracy": 0.6716253443526171,
+      "precision_dropout": 0.5471775854964978,
+      "recall_dropout": 0.9345531315974666,
+      "f1_dropout": 0.6902286902286903,
+      "confusion_matrix": [
+        [
+          1110,
+          1099
+        ],
+        [
+          93,
+          1328
+        ]
+      ]
+    },
+    {
+      "threshold": 50,
+      "accuracy": 0.6724517906336088,
+      "precision_dropout": 0.5478547854785478,
+      "recall_dropout": 0.9345531315974666,
+      "f1_dropout": 0.6907672301690507,
+      "confusion_matrix": [
+        [
+          1113,
+          1096
+        ],
+        [
+          93,
+          1328
+        ]
+      ]
+    },
+    {
+      "threshold": 55,
+      "accuracy": 0.8258953168044078,
+      "precision_dropout": 0.8848780487804878,
+      "recall_dropout": 0.6382828993666432,
+      "f1_dropout": 0.741618969746525,
+      "confusion_matrix": [
+        [
+          2091,
+          118
+        ],
+        [
+          514,
+          907
+        ]
+      ]
+    },
+    {
+      "threshold": 60,
+      "accuracy": 0.8275482093663912,
+      "precision_dropout": 0.8939544103072349,
+      "recall_dropout": 0.6347642505277973,
+      "f1_dropout": 0.7423868312757201,
+      "confusion_matrix": [
+        [
+          2102,
+          107
+        ],
+        [
+          519,
+          902
+        ]
+      ]
+    },
+    {
+      "threshold": 65,
+      "accuracy": 0.8261707988980717,
+      "precision_dropout": 0.9038854805725971,
+      "recall_dropout": 0.6220971147079521,
+      "f1_dropout": 0.7369737390579408,
+      "confusion_matrix": [
+        [
+          2115,
+          94
+        ],
+        [
+          537,
+          884
+        ]
+      ]
+    },
+    {
+      "threshold": 70,
+      "accuracy": 0.8038567493112948,
+      "precision_dropout": 0.9098265895953758,
+      "recall_dropout": 0.553835327234342,
+      "f1_dropout": 0.6885389326334208,
+      "confusion_matrix": [
+        [
+          2131,
+          78
+        ],
+        [
+          634,
+          787
+        ]
+      ]
+    },
+    {
+      "threshold": 75,
+      "accuracy": 0.7988980716253443,
+      "precision_dropout": 0.9088757396449704,
+      "recall_dropout": 0.5404644616467277,
+      "f1_dropout": 0.677846425419241,
+      "confusion_matrix": [
+        [
+          2132,
+          77
+        ],
+        [
+          653,
+          768
+        ]
+      ]
+    },
+    {
+      "threshold": 80,
+      "accuracy": 0.7972451790633609,
+      "precision_dropout": 0.9091995221027479,
+      "recall_dropout": 0.5355383532723434,
+      "f1_dropout": 0.6740478299379983,
+      "confusion_matrix": [
+        [
+          2133,
+          76
+        ],
+        [
+          660,
+          761
+        ]
+      ]
+    }
+  ],
+  "best_by_f1": {
+    "threshold": 60,
+    "accuracy": 0.8275482093663912,
+    "precision_dropout": 0.8939544103072349,
+    "recall_dropout": 0.6347642505277973,
+    "f1_dropout": 0.7423868312757201,
+    "confusion_matrix": [
+      [
+        2102,
+        107
+      ],
+      [
+        519,
+        902
+      ]
+    ]
+  }
+}
