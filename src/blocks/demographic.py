@@ -1,45 +1,17 @@
-"""SIN 3 - Bloco demografico. Slide 8: idade, deslocado, turno,
-internacional -> RISCO_DEMOGRAFICO (0-100).
-"""
+"""Definicao linguistica do subsistema demografico."""
 
-from ..membership import AND, OR, defuzzify, trapmf, trimf
+from __future__ import annotations
 
-
-def fuzzify_idade(idade):
-    jovem = trapmf(idade, [17, 17, 20, 25])
-    adulto = trimf(idade, [23, 31.5, 40])
-    velha = trapmf(idade, [35, 45, 70, 70])
-    return jovem, adulto, velha
+from ..membership import FuzzyVariable, binary_terms, trapmf, trimf
 
 
-def compute(df):
-    idade = df["idade"].to_numpy(dtype=float)
-    deslocado = df["deslocado"].to_numpy(dtype=float)
-    noturno = df["noturno"].to_numpy(dtype=float)
-    internacional = df["internacional"].to_numpy(dtype=float)
-
-    nao_deslocado = 1 - deslocado
-
-    idade_jovem, idade_adulto, idade_velha = fuzzify_idade(idade)
-
-    # --- regras (slide 8 + regras de cobertura) ---
-    # Displaced, turno e internacional entram como fatores contextuais que
-    # reforcam ou atenuam o risco associado a faixa etaria, nao como
-    # determinantes isolados.
-    r_alto = OR(
-        AND(idade_velha, deslocado),                 # idade alta E deslocado -> alto
-        AND(idade_adulto, deslocado, noturno),
+def variables() -> tuple[FuzzyVariable, ...]:
+    return (
+        FuzzyVariable(
+            "idade", "Idade no ingresso", 17.0, 70.0,
+            {"jovem": trapmf((17.0, 17.0, 20.0, 25.0)), "adulta": trimf((23.0, 31.5, 40.0)), "mais_velha": trapmf((35.0, 45.0, 70.0, 70.0))},
+        ),
+        FuzzyVariable("deslocado", "Deslocado", 0.0, 1.0, binary_terms(), binary=True),
+        FuzzyVariable("noturno", "Curso noturno", 0.0, 1.0, binary_terms(), binary=True),
+        FuzzyVariable("internacional", "Estudante internacional", 0.0, 1.0, binary_terms(), binary=True),
     )
-    r_medio = OR(
-        AND(noturno, idade_velha),                    # noturno E idade alta -> medio
-        idade_adulto,
-        AND(idade_velha, nao_deslocado),
-        AND(idade_jovem, deslocado),
-        AND(internacional, idade_velha),
-    )
-    r_baixo = OR(
-        AND(idade_jovem, nao_deslocado),              # idade baixa E nao deslocado -> baixo
-        AND(idade_jovem, nao_deslocado, 1 - noturno),
-    )
-
-    return defuzzify({"alto": r_alto, "medio": r_medio, "baixo": r_baixo})

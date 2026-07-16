@@ -1,0 +1,578 @@
+[
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 405.0,
+    "estimated_risk": 43.4043635595742,
+    "weight": 0.67021817797871
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 686.5,
+    "estimated_risk": 37.08718591384733,
+    "weight": 0.5275209390768448
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 343.5,
+    "estimated_risk": 33.416898305381416,
+    "weight": 0.772206779641239
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 192.5,
+    "estimated_risk": 10.105261060381888,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 376.0,
+    "estimated_risk": 12.062438476182214,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 70.5,
+    "estimated_risk": 15.838265687753946,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 60.0,
+    "estimated_risk": 94.55060091423728,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 80.5,
+    "estimated_risk": 91.17881940848447,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 26.5,
+    "estimated_risk": 80.81870029921978,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 3.5,
+    "estimated_risk": 52.4457716971086,
+    "weight": 0.8777114151445702
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 3.5,
+    "estimated_risk": 40.681065814755655,
+    "weight": 0.5340532907377827
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "nao"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 2.0,
+    "estimated_risk": 42.25557991791758,
+    "weight": 0.6127789958958789
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 26.0,
+    "estimated_risk": 61.15448578791687,
+    "weight": 0.44227571060415655
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 44.5,
+    "estimated_risk": 56.48058705909945,
+    "weight": 0.6759706470450275
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 25.5,
+    "estimated_risk": 55.599641292636825,
+    "weight": 0.7200179353681587
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 12.5,
+    "estimated_risk": 31.187946252881314,
+    "weight": 0.9208035831412457
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 21.5,
+    "estimated_risk": 22.4826060160537,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "nao"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 5.0,
+    "estimated_risk": 34.578905942542306,
+    "weight": 0.6947396038305129
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 40.0,
+    "estimated_risk": 88.79531243167607,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 74.0,
+    "estimated_risk": 91.0859374610813,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "nao"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 27.0,
+    "estimated_risk": 90.49340810704447,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 4.5,
+    "estimated_risk": 57.451479939518215,
+    "weight": 0.6274260030240892
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 7.0,
+    "estimated_risk": 66.3157549521186,
+    "weight": 0.7543836634745731
+  },
+  {
+    "antecedents": [
+      [
+        "debtor",
+        "sim"
+      ],
+      [
+        "tuition_late",
+        "sim"
+      ],
+      [
+        "scholarship",
+        "sim"
+      ],
+      [
+        "capital_educacional",
+        "alto"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 3.5,
+    "estimated_risk": 52.4457716971086,
+    "weight": 0.8777114151445702
+  }
+]

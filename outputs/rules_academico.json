@@ -1,0 +1,302 @@
+[
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "baixa"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 473.4522222216666,
+    "estimated_risk": 89.54083457416544,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "baixa"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "medias"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 9.0,
+    "estimated_risk": 78.27064710181594,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "baixa"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "muitas"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 9.848333333333333,
+    "estimated_risk": 79.51211535023614,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "baixa"
+      ],
+      [
+        "aprovadas",
+        "medias"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 5.564246031666666,
+    "estimated_risk": 68.04842741298238,
+    "weight": 0.8698951608654918
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 21.254603175238096,
+    "estimated_risk": 88.41304366536791,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "medias"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 2.5742857142857143,
+    "estimated_risk": 59.83635262123654,
+    "weight": 0.5081823689381728
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "medias"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 183.81520408095238,
+    "estimated_risk": 66.0045053019712,
+    "weight": 0.7336336867980795
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "medias"
+      ],
+      [
+        "sem_avaliacao",
+        "medias"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 8.922630384761904,
+    "estimated_risk": 54.84813631702296,
+    "weight": 0.7575931841488519
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "muitas"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 532.7107933438095,
+    "estimated_risk": 10.948053397782633,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "muitas"
+      ],
+      [
+        "sem_avaliacao",
+        "medias"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 3.4834126990476184,
+    "estimated_risk": 34.86675350105618,
+    "weight": 0.6755497665962547
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "media"
+      ],
+      [
+        "aprovadas",
+        "muitas"
+      ],
+      [
+        "sem_avaliacao",
+        "muitas"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 3.055196234285715,
+    "estimated_risk": 24.305932932096276,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "alta"
+      ],
+      [
+        "aprovadas",
+        "poucas"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 1.253333333333333,
+    "estimated_risk": 51.352195004065514,
+    "weight": 0.9323902497967242
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "alta"
+      ],
+      [
+        "aprovadas",
+        "medias"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 10.747539683333333,
+    "estimated_risk": 49.477833019849655,
+    "weight": 0.9738916509924828
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "alta"
+      ],
+      [
+        "aprovadas",
+        "medias"
+      ],
+      [
+        "sem_avaliacao",
+        "medias"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 2.1398412700000007,
+    "estimated_risk": 31.413731894549958,
+    "weight": 0.9057512070300028
+  },
+  {
+    "antecedents": [
+      [
+        "nota_academica",
+        "alta"
+      ],
+      [
+        "aprovadas",
+        "muitas"
+      ],
+      [
+        "sem_avaliacao",
+        "poucas"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 227.88566779,
+    "estimated_risk": 7.712789311900073,
+    "weight": 1.0
+  }
+]

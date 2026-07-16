@@ -1,0 +1,48 @@
+{
+  "academico": {
+    "x_variable": "nota_academica",
+    "y_variable": "aprovadas",
+    "fixed_values": {
+      "sem_avaliacao": 0.0
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  },
+  "social": {
+    "x_variable": "debtor",
+    "y_variable": "tuition_late",
+    "fixed_values": {
+      "scholarship": 0.0,
+      "capital_educacional": 1.0
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  },
+  "demografico": {
+    "x_variable": "idade",
+    "y_variable": "deslocado",
+    "fixed_values": {
+      "noturno": 0.0,
+      "internacional": 0.0
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  },
+  "final": {
+    "x_variable": "risco_academico",
+    "y_variable": "risco_social",
+    "fixed_values": {
+      "risco_demografico": 18.999955555555555
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  }
+}

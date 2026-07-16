@@ -1,0 +1,542 @@
+[
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 968.3120686804766,
+    "estimated_risk": 8.218034846971378,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 90.99111321508764,
+    "estimated_risk": 17.592395749525924,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 96.19740399842412,
+    "estimated_risk": 20.083410511766715,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 115.07379501365091,
+    "estimated_risk": 14.583805341282938,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 34.43703557568902,
+    "estimated_risk": 26.710448087952305,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 34.21368872859867,
+    "estimated_risk": 35.444989442506206,
+    "weight": 0.6370007038329196
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 26.24720045237258,
+    "estimated_risk": 61.222760952773605,
+    "weight": 0.43886195236131975
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 10.994996189745152,
+    "estimated_risk": 65.41386764563653,
+    "weight": 0.6942578430424352
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 19.435346926349702,
+    "estimated_risk": 72.50601480630195,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 108.99712834163233,
+    "estimated_risk": 23.03337246463647,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 29.83866993517398,
+    "estimated_risk": 34.38695142723747,
+    "weight": 0.707536571517502
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 19.184047607968424,
+    "estimated_risk": 49.23770253050636,
+    "weight": 0.9618851265253181
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 26.522100779906456,
+    "estimated_risk": 45.29086999016378,
+    "weight": 0.7645434995081889
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 12.556619504923702,
+    "estimated_risk": 36.66090206461243,
+    "weight": 0.5559398623591714
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 6.770866923659053,
+    "estimated_risk": 46.16432487641112,
+    "weight": 0.8082162438205561
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 9.117507746228235,
+    "estimated_risk": 68.71850988854345,
+    "weight": 0.9145673259028968
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 5.121208717577298,
+    "estimated_risk": 69.94322031455987,
+    "weight": 0.9962146876373245
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 10.885425040212066,
+    "estimated_risk": 80.84968203214562,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 323.72113561806964,
+    "estimated_risk": 60.454476406492155,
+    "weight": 0.47727617967539226
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 54.89388612034939,
+    "estimated_risk": 78.6447748733784,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 104.4201392411929,
+    "estimated_risk": 88.87972372344268,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 79.05119178929965,
+    "estimated_risk": 79.5917061385438,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 32.003455461758534,
+    "estimated_risk": 84.35127494624206,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "medio"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 45.92471824302331,
+    "estimated_risk": 85.16233164353334,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 98.8177262339616,
+    "estimated_risk": 95.14330587978495,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 48.574693542861084,
+    "estimated_risk": 94.32174184382033,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "alto"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 86.87419854146823,
+    "estimated_risk": 95.77663794900894,
+    "weight": 1.0
+  }
+]

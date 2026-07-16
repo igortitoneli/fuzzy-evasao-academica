@@ -1,0 +1,338 @@
+{
+  "verdadeiro_positivo": {
+    "input_values": {
+      "noturno": 0.0,
+      "risco_demografico": 18.999955555555555,
+      "scholarship": 0.0,
+      "deslocado": 0.0,
+      "aprovadas": 3.0,
+      "debtor": 1.0,
+      "sem_avaliacao": 0.0,
+      "capital_educacional": 3.0,
+      "idade": 20.0,
+      "tuition_late": 1.0,
+      "risco_academico": 79.27993128114424,
+      "internacional": 1.0,
+      "risco_social": 81.00004444444446,
+      "nota_academica": 11.888888889999999
+    },
+    "risks": {
+      "risco_academico": 79.27993128114424,
+      "risco_social": 81.00004444444446,
+      "risco_demografico": 18.999955555555555,
+      "risco_evasao": 81.00004444444446
+    },
+    "blocks": {
+      "academico": {
+        "risk": 79.27993128114424,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE nota_academica=media E aprovadas=medias E sem_avaliacao=poucas ENTAO risco=alto",
+            "consequent": "alto",
+            "firing_strength": 0.489089124532053,
+            "weight": 0.7336336867980795,
+            "support": 183.81520408095238,
+            "estimated_risk": 66.0045053019712
+          }
+        ]
+      },
+      "social": {
+        "risk": 81.00004444444446,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE debtor=sim E tuition_late=sim E scholarship=nao E capital_educacional=alto ENTAO risco=alto",
+            "consequent": "alto",
+            "firing_strength": 1.0,
+            "weight": 1.0,
+            "support": 27.0,
+            "estimated_risk": 90.49340810704447
+          }
+        ]
+      },
+      "demografico": {
+        "risk": 18.999955555555555,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE idade=jovem E deslocado=nao E noturno=nao E internacional=sim ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 1.0,
+            "weight": 1.0,
+            "support": 12.0,
+            "estimated_risk": 18.57582702502489
+          }
+        ]
+      },
+      "final": {
+        "risk": 81.00004444444446,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE risco_academico=alto E risco_social=alto E risco_demografico=baixo ENTAO risco=alto",
+            "consequent": "alto",
+            "firing_strength": 1.0,
+            "weight": 1.0,
+            "support": 98.8177262339616,
+            "estimated_risk": 95.14330587978495
+          }
+        ]
+      }
+    }
+  },
+  "verdadeiro_negativo": {
+    "input_values": {
+      "noturno": 0.0,
+      "risco_demografico": 21.035674603174595,
+      "scholarship": 0.0,
+      "deslocado": 1.0,
+      "aprovadas": 9.0,
+      "debtor": 0.0,
+      "sem_avaliacao": 2.0,
+      "capital_educacional": 0.5,
+      "idade": 23.0,
+      "tuition_late": 0.0,
+      "risco_academico": 20.10822076269584,
+      "internacional": 0.0,
+      "risco_social": 49.99999999999999,
+      "nota_academica": 11.552272726666667
+    },
+    "risks": {
+      "risco_academico": 20.10822076269584,
+      "risco_social": 49.99999999999999,
+      "risco_demografico": 21.035674603174595,
+      "risco_evasao": 18.99995555555555
+    },
+    "blocks": {
+      "academico": {
+        "risk": 20.10822076269584,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE nota_academica=media E aprovadas=muitas E sem_avaliacao=medias ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 0.66546038708225,
+            "weight": 0.6755497665962547,
+            "support": 3.4834126990476184,
+            "estimated_risk": 34.86675350105618
+          }
+        ]
+      },
+      "social": {
+        "risk": 49.99999999999999,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=baixo ENTAO risco=medio",
+            "consequent": "medio",
+            "firing_strength": 0.67021817797871,
+            "weight": 0.67021817797871,
+            "support": 405.0,
+            "estimated_risk": 43.4043635595742
+          }
+        ]
+      },
+      "demografico": {
+        "risk": 21.035674603174595,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE idade=jovem E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 0.4,
+            "weight": 1.0,
+            "support": 1093.1999999999998,
+            "estimated_risk": 28.406291257899678
+          }
+        ]
+      },
+      "final": {
+        "risk": 18.99995555555555,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE risco_academico=baixo E risco_social=medio E risco_demografico=baixo ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 0.9999999999999997,
+            "weight": 1.0,
+            "support": 115.07379501365091,
+            "estimated_risk": 14.583805341282938
+          }
+        ]
+      }
+    }
+  },
+  "falso_positivo": {
+    "input_values": {
+      "noturno": 0.0,
+      "risco_demografico": 18.999955555555555,
+      "scholarship": 0.0,
+      "deslocado": 1.0,
+      "aprovadas": 4.5,
+      "debtor": 0.0,
+      "sem_avaliacao": 0.0,
+      "capital_educacional": 0.5,
+      "idade": 20.0,
+      "tuition_late": 0.0,
+      "risco_academico": 78.40422791349425,
+      "internacional": 0.0,
+      "risco_social": 49.99999999999999,
+      "nota_academica": 12.256666666666666
+    },
+    "risks": {
+      "risco_academico": 78.40422791349425,
+      "risco_social": 49.99999999999999,
+      "risco_demografico": 18.999955555555555,
+      "risco_evasao": 81.00004444444443
+    },
+    "blocks": {
+      "academico": {
+        "risk": 78.40422791349425,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE nota_academica=media E aprovadas=medias E sem_avaliacao=poucas ENTAO risco=alto",
+            "consequent": "alto",
+            "firing_strength": 0.2445445622660265,
+            "weight": 0.7336336867980795,
+            "support": 183.81520408095238,
+            "estimated_risk": 66.0045053019712
+          }
+        ]
+      },
+      "social": {
+        "risk": 49.99999999999999,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=baixo ENTAO risco=medio",
+            "consequent": "medio",
+            "firing_strength": 0.67021817797871,
+            "weight": 0.67021817797871,
+            "support": 405.0,
+            "estimated_risk": 43.4043635595742
+          }
+        ]
+      },
+      "demografico": {
+        "risk": 18.999955555555555,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE idade=jovem E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 1.0,
+            "weight": 1.0,
+            "support": 1093.1999999999998,
+            "estimated_risk": 28.406291257899678
+          }
+        ]
+      },
+      "final": {
+        "risk": 81.00004444444443,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE risco_academico=alto E risco_social=medio E risco_demografico=baixo ENTAO risco=alto",
+            "consequent": "alto",
+            "firing_strength": 0.9999999999999997,
+            "weight": 1.0,
+            "support": 79.05119178929965,
+            "estimated_risk": 79.5917061385438
+          }
+        ]
+      }
+    }
+  },
+  "falso_negativo": {
+    "input_values": {
+      "noturno": 0.0,
+      "risco_demografico": 19.653803418803417,
+      "scholarship": 0.0,
+      "deslocado": 0.0,
+      "aprovadas": 6.0,
+      "debtor": 1.0,
+      "sem_avaliacao": 0.0,
+      "capital_educacional": 2.0,
+      "idade": 21.0,
+      "tuition_late": 0.0,
+      "risco_academico": 20.68177777777778,
+      "internacional": 0.0,
+      "risco_social": 50.0,
+      "nota_academica": 12.314814816666667
+    },
+    "risks": {
+      "risco_academico": 20.68177777777778,
+      "risco_social": 50.0,
+      "risco_demografico": 19.653803418803417,
+      "risco_evasao": 18.999955555555555
+    },
+    "blocks": {
+      "academico": {
+        "risk": 20.68177777777778,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE nota_academica=media E aprovadas=muitas E sem_avaliacao=poucas ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 0.5,
+            "weight": 1.0,
+            "support": 532.7107933438095,
+            "estimated_risk": 10.948053397782633
+          }
+        ]
+      },
+      "social": {
+        "risk": 50.0,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=alto ENTAO risco=medio",
+            "consequent": "medio",
+            "firing_strength": 0.36000896768407936,
+            "weight": 0.7200179353681587,
+            "support": 25.5,
+            "estimated_risk": 55.599641292636825
+          },
+          {
+            "label": "SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=medio ENTAO risco=medio",
+            "consequent": "medio",
+            "firing_strength": 0.33798532352251376,
+            "weight": 0.6759706470450275,
+            "support": 44.5,
+            "estimated_risk": 56.48058705909945
+          }
+        ]
+      },
+      "demografico": {
+        "risk": 19.653803418803417,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE idade=jovem E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 0.8,
+            "weight": 1.0,
+            "support": 512.0,
+            "estimated_risk": 26.99378928322132
+          }
+        ]
+      },
+      "final": {
+        "risk": 18.999955555555555,
+        "used_prior_fallback": false,
+        "activations": [
+          {
+            "label": "SE risco_academico=baixo E risco_social=medio E risco_demografico=baixo ENTAO risco=baixo",
+            "consequent": "baixo",
+            "firing_strength": 1.0,
+            "weight": 1.0,
+            "support": 115.07379501365091,
+            "estimated_risk": 14.583805341282938
+          }
+        ]
+      }
+    }
+  }
+}

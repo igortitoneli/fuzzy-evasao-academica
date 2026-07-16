@@ -1,0 +1,434 @@
+[
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 512.0,
+    "estimated_risk": 26.99378928322132,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 12.0,
+    "estimated_risk": 18.57582702502489,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 21.4,
+    "estimated_risk": 36.961706796417545,
+    "weight": 0.5358862135721637
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 1093.1999999999998,
+    "estimated_risk": 28.406291257899678,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 26.799999999999997,
+    "estimated_risk": 23.138020736648528,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "jovem"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "baixo",
+    "support": 9.2,
+    "estimated_risk": 32.097821086297394,
+    "weight": 0.8601452609135071
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 142.58823529411765,
+    "estimated_risk": 68.68410283389086,
+    "weight": 0.9122735222593907
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 4.117647058823529,
+    "estimated_risk": 56.312348453110914,
+    "weight": 0.6843825773444543
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 83.29411764705881,
+    "estimated_risk": 51.38468621601079,
+    "weight": 0.9307656891994605
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 1.0588235294117647,
+    "estimated_risk": 43.96518456536109,
+    "weight": 0.6982592282680546
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 57.1764705882353,
+    "estimated_risk": 70.69859414402289,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 1.8823529411764706,
+    "estimated_risk": 47.251401796856335,
+    "weight": 0.8625700898428168
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "adulta"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 17.88235294117647,
+    "estimated_risk": 65.11160413941437,
+    "weight": 0.6741069426276245
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "mais_velha"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 70.30000000000001,
+    "estimated_risk": 64.22030623406935,
+    "weight": 0.6146870822712903
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "mais_velha"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "sim"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 2.6,
+    "estimated_risk": 46.81434992439777,
+    "weight": 0.8407174962198883
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "mais_velha"
+      ],
+      [
+        "deslocado",
+        "nao"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 61.7,
+    "estimated_risk": 45.66400388943663,
+    "weight": 0.7832001944718314
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "mais_velha"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "nao"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "medio",
+    "support": 14.0,
+    "estimated_risk": 57.14679260133805,
+    "weight": 0.6426603699330975
+  },
+  {
+    "antecedents": [
+      [
+        "idade",
+        "mais_velha"
+      ],
+      [
+        "deslocado",
+        "sim"
+      ],
+      [
+        "noturno",
+        "sim"
+      ],
+      [
+        "internacional",
+        "nao"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 11.8,
+    "estimated_risk": 68.79696782294185,
+    "weight": 0.9197978548627901
+  }
+]

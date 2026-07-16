@@ -1,0 +1,16 @@
+rule,consequent,support,estimated_risk,weight
+SE nota_academica=baixa E aprovadas=poucas E sem_avaliacao=poucas ENTAO risco=alto,alto,473.4522222216666,89.54083457416544,1.0
+SE nota_academica=baixa E aprovadas=poucas E sem_avaliacao=medias ENTAO risco=alto,alto,9.0,78.27064710181594,1.0
+SE nota_academica=baixa E aprovadas=poucas E sem_avaliacao=muitas ENTAO risco=alto,alto,9.848333333333333,79.51211535023614,1.0
+SE nota_academica=baixa E aprovadas=medias E sem_avaliacao=poucas ENTAO risco=alto,alto,5.564246031666666,68.04842741298238,0.8698951608654918
+SE nota_academica=media E aprovadas=poucas E sem_avaliacao=poucas ENTAO risco=alto,alto,21.254603175238096,88.41304366536791,1.0
+SE nota_academica=media E aprovadas=poucas E sem_avaliacao=medias ENTAO risco=medio,medio,2.5742857142857143,59.83635262123654,0.5081823689381728
+SE nota_academica=media E aprovadas=medias E sem_avaliacao=poucas ENTAO risco=alto,alto,183.81520408095238,66.0045053019712,0.7336336867980795
+SE nota_academica=media E aprovadas=medias E sem_avaliacao=medias ENTAO risco=medio,medio,8.922630384761904,54.84813631702296,0.7575931841488519
+SE nota_academica=media E aprovadas=muitas E sem_avaliacao=poucas ENTAO risco=baixo,baixo,532.7107933438095,10.948053397782633,1.0
+SE nota_academica=media E aprovadas=muitas E sem_avaliacao=medias ENTAO risco=baixo,baixo,3.4834126990476184,34.86675350105618,0.6755497665962547
+SE nota_academica=media E aprovadas=muitas E sem_avaliacao=muitas ENTAO risco=baixo,baixo,3.055196234285715,24.305932932096276,1.0
+SE nota_academica=alta E aprovadas=poucas E sem_avaliacao=poucas ENTAO risco=medio,medio,1.253333333333333,51.352195004065514,0.9323902497967242
+SE nota_academica=alta E aprovadas=medias E sem_avaliacao=poucas ENTAO risco=medio,medio,10.747539683333333,49.477833019849655,0.9738916509924828
+SE nota_academica=alta E aprovadas=medias E sem_avaliacao=medias ENTAO risco=baixo,baixo,2.1398412700000007,31.413731894549958,0.9057512070300028
+SE nota_academica=alta E aprovadas=muitas E sem_avaliacao=poucas ENTAO risco=baixo,baixo,227.88566779,7.712789311900073,1.0

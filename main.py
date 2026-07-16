@@ -1,69 +1,55 @@
-"""CLI: busca o dataset (UCI id=697), roda o SIN de 4 blocos e avalia contra o Target.
+"""CLI do experimento fuzzy de risco de evasao academica."""
 
-Uso:
-    .venv/bin/python main.py [--threshold 60] [--no-cache]
-"""
+from __future__ import annotations
 
 import argparse
-import os
 
 import matplotlib
-matplotlib.use("Agg")  # roda headless (CLI), sem display disponivel
 
-from src import data, evaluate, pipeline
+matplotlib.use("Agg")
 
-OUTPUT_DIR = evaluate.OUTPUT_DIR
+from src import data, evaluate
+from src.experiment import export_experiment, run_experiment
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--threshold", type=float, default=60)
-    parser.add_argument("--no-cache", action="store_true")
-    args = parser.parse_args()
-
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-    print("Carregando dataset (UCI id=697)...")
-    raw = data.load_raw(use_cache=not args.no_cache)
-    df = data.build_features(raw)
-    print(f"  {len(df)} alunos (Dropout/Graduate) apos remover 'Enrolled'.")
-
-    print("Rodando SIN (4 blocos fuzzy)...")
-    df = pipeline.run(df)
-
-    y_true = df["y_true"].to_numpy()
-    risco = df["risco_evasao"].to_numpy()
-
-    metrics = evaluate.metrics_at_threshold(y_true, risco, threshold=args.threshold)
-    print(f"\n=== Resultado no limiar {args.threshold} ===")
-    print(f"Acuracia:            {metrics['accuracy']:.3f}")
-    print(f"Precisao (Dropout):  {metrics['precision_dropout']:.3f}")
-    print(f"Recall (Dropout):    {metrics['recall_dropout']:.3f}")
-    print(f"F1 (Dropout):        {metrics['f1_dropout']:.3f}")
-    print(f"Matriz de confusao [[TN,FP],[FN,TP]]: {metrics['confusion_matrix']}")
-
-    sweep = evaluate.threshold_sweep(y_true, risco)
-    best = evaluate.best_threshold(sweep)
-    print(f"\nMelhor limiar por F1: {best['threshold']} (F1={best['f1_dropout']:.3f}, "
-          f"acuracia={best['accuracy']:.3f})")
-
-    evaluate.save_json(
-        {"chosen_threshold": metrics, "sweep": sweep, "best_by_f1": best},
-        os.path.join(OUTPUT_DIR, "metrics.json"),
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=None,
+        help="Sobrescreve o limiar selecionado por F2 na validacao.",
     )
-    evaluate.plot_confusion_matrix(
-        metrics["confusion_matrix"], args.threshold,
-        os.path.join(OUTPUT_DIR, "confusion_matrix.png"),
-    )
-    evaluate.plot_risk_distribution(
-        df, args.threshold, os.path.join(OUTPUT_DIR, "risk_distribution.png"),
-    )
-    evaluate.plot_threshold_sweep(sweep, os.path.join(OUTPUT_DIR, "threshold_sweep.png"))
+    parser.add_argument("--no-cache", action="store_true", help="Forca novo download do UCI.")
+    parser.add_argument("--random-state", type=int, default=42)
+    parser.add_argument("--folds", type=int, default=5)
+    parser.add_argument("--bootstrap-iterations", type=int, default=1000)
+    parser.add_argument("--output-dir", default=str(evaluate.OUTPUT_DIR))
+    return parser
 
-    cols = ["risco_academico", "risco_social", "risco_demografico", "risco_evasao", "Target"]
-    df[cols].to_csv(os.path.join(OUTPUT_DIR, "predictions.csv"), index=False)
 
-    print(f"\nOutputs salvos em {OUTPUT_DIR}/")
+def main() -> None:
+    args = build_parser().parse_args()
+    if args.threshold is not None and not 0.0 <= args.threshold <= 100.0:
+        raise SystemExit("--threshold deve estar entre 0 e 100")
+    print("Carregando e preparando o dataset UCI 697...")
+    frame = data.build_features(data.load_raw(use_cache=not args.no_cache))
+    print(f"Executando experimento estratificado com {len(frame)} estudantes...")
+    result = run_experiment(
+        frame,
+        threshold_override=args.threshold,
+        random_state=args.random_state,
+        folds=args.folds,
+        bootstrap_iterations=args.bootstrap_iterations,
+    )
+    export_experiment(result, args.output_dir)
+    metrics = result.test_metrics
+    print(f"Limiar: {metrics.threshold:.0f} ({result.threshold_source})")
+    print(f"F2 teste: {metrics.f2_dropout:.3f}")
+    print(f"Recall teste: {metrics.recall_dropout:.3f}")
+    print(f"Precisao teste: {metrics.precision_dropout:.3f}")
+    print(f"Acuracia teste: {metrics.accuracy:.3f}")
+    print(f"Artefatos salvos em {args.output_dir}/")
 
 
 if __name__ == "__main__":

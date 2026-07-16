@@ -16,3 +16,8 @@ jupyter==1.1.1
 nbconvert==7.17.1
 nbformat==5.10.4
 notebook==7.6.0
+
+# verificacao e testes
+pytest>=8.0,<10.0
+mypy>=1.13,<2.0
+pandas-stubs>=2.3,<3.0

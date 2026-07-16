@@ -1,93 +1,220 @@
-"""Slide 10: converte o risco continuo (0-100) em classe via limiar e mede
-desempenho contra o Target real do dataset."""
+"""Separacao experimental, selecao de limiar e avaliacao sem vazamento."""
 
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
 import json
-import os
+from pathlib import Path
+from typing import Any, Mapping, Sequence
 
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import (accuracy_score, confusion_matrix, f1_score,
-                              precision_score, recall_score)
+import pandas as pd
+from numpy.typing import NDArray
+from sklearn.metrics import (
+    accuracy_score,
+    average_precision_score,
+    balanced_accuracy_score,
+    confusion_matrix,
+    f1_score,
+    fbeta_score,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+from sklearn.model_selection import train_test_split
 
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "outputs")
+FloatArray = NDArray[np.float64]
+IntArray = NDArray[np.int64]
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
 
 
-def predict_class(risco_evasao, threshold=60):
-    """risco >= limiar -> previsto Dropout (1); caso contrario Graduate (0)."""
-    return (risco_evasao >= threshold).astype(int)
+@dataclass(frozen=True)
+class ExperimentSplit:
+    train: pd.DataFrame
+    validation: pd.DataFrame
+    test: pd.DataFrame
 
 
-def metrics_at_threshold(y_true, risco_evasao, threshold=60):
-    y_pred = predict_class(risco_evasao, threshold)
-    cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
+@dataclass(frozen=True)
+class ClassificationMetrics:
+    threshold: float
+    accuracy: float
+    precision_dropout: float
+    recall_dropout: float
+    f1_dropout: float
+    f2_dropout: float
+    specificity: float
+    balanced_accuracy: float
+    roc_auc: float
+    pr_auc: float
+    confusion_matrix: list[list[int]]
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def stratified_split(df: pd.DataFrame, *, random_state: int = 42) -> ExperimentSplit:
+    """Cria particoes estratificadas e disjuntas de 70%, 15% e 15%."""
+
+    train, remainder = train_test_split(
+        df,
+        test_size=0.30,
+        stratify=df["y_true"],
+        random_state=random_state,
+    )
+    validation, test = train_test_split(
+        remainder,
+        test_size=0.50,
+        stratify=remainder["y_true"],
+        random_state=random_state,
+    )
+    id_sets = [set(part["row_id"].tolist()) for part in (train, validation, test)]
+    if id_sets[0] & id_sets[1] or id_sets[0] & id_sets[2] or id_sets[1] & id_sets[2]:
+        raise RuntimeError("As particoes experimentais nao sao disjuntas")
+    return ExperimentSplit(
+        train=train.sort_index().copy(),
+        validation=validation.sort_index().copy(),
+        test=test.sort_index().copy(),
+    )
+
+
+def predict_class(risk: FloatArray, threshold: float) -> IntArray:
+    return np.asarray(risk >= threshold, dtype=np.int64)
+
+
+def metrics_at_threshold(y_true: IntArray, risk: FloatArray, threshold: float) -> ClassificationMetrics:
+    y = np.asarray(y_true, dtype=np.int64)
+    scores = np.asarray(risk, dtype=np.float64)
+    predicted = predict_class(scores, threshold)
+    matrix = confusion_matrix(y, predicted, labels=[0, 1])
+    true_negative, false_positive, false_negative, true_positive = matrix.ravel()
+    specificity_denominator = true_negative + false_positive
+    specificity = float(true_negative / specificity_denominator) if specificity_denominator else 0.0
+    has_both_classes = len(np.unique(y)) == 2
+    return ClassificationMetrics(
+        threshold=float(threshold),
+        accuracy=float(accuracy_score(y, predicted)),
+        precision_dropout=float(precision_score(y, predicted, zero_division=0)),
+        recall_dropout=float(recall_score(y, predicted, zero_division=0)),
+        f1_dropout=float(f1_score(y, predicted, zero_division=0)),
+        f2_dropout=float(fbeta_score(y, predicted, beta=2.0, zero_division=0)),
+        specificity=specificity,
+        balanced_accuracy=float(balanced_accuracy_score(y, predicted)) if has_both_classes else float("nan"),
+        roc_auc=float(roc_auc_score(y, scores)) if has_both_classes else float("nan"),
+        pr_auc=float(average_precision_score(y, scores)) if has_both_classes else float("nan"),
+        confusion_matrix=[[int(value) for value in row] for row in matrix.tolist()],
+    )
+
+
+def threshold_sweep(y_true: IntArray, risk: FloatArray) -> list[ClassificationMetrics]:
+    return [metrics_at_threshold(y_true, risk, float(threshold)) for threshold in range(101)]
+
+
+def select_f2_threshold(results: Sequence[ClassificationMetrics]) -> ClassificationMetrics:
+    """Seleciona maior F2; a ordem crescente garante desempate pelo menor limiar."""
+
+    if not results:
+        raise ValueError("A varredura de limiar nao pode estar vazia")
+    best_f2 = max(result.f2_dropout for result in results)
+    return next(result for result in results if np.isclose(result.f2_dropout, best_f2))
+
+
+def bootstrap_confidence_intervals(
+    y_true: IntArray,
+    risk: FloatArray,
+    threshold: float,
+    *,
+    iterations: int = 1000,
+    random_state: int = 42,
+) -> Mapping[str, Mapping[str, float]]:
+    """IC percentil de 95% com reamostragem estratificada por classe."""
+
+    y = np.asarray(y_true, dtype=np.int64)
+    scores = np.asarray(risk, dtype=np.float64)
+    rng = np.random.default_rng(random_state)
+    class_indices = [np.flatnonzero(y == label) for label in (0, 1)]
+    metric_names = (
+        "accuracy", "precision_dropout", "recall_dropout", "f1_dropout",
+        "f2_dropout", "specificity", "balanced_accuracy", "roc_auc", "pr_auc",
+    )
+    samples: dict[str, list[float]] = {name: [] for name in metric_names}
+    for _ in range(iterations):
+        selected = np.concatenate(
+            [rng.choice(indices, size=len(indices), replace=True) for indices in class_indices]
+        )
+        metrics = metrics_at_threshold(y[selected], scores[selected], threshold)
+        for name in metric_names:
+            samples[name].append(float(getattr(metrics, name)))
     return {
-        "threshold": threshold,
-        "accuracy": accuracy_score(y_true, y_pred),
-        "precision_dropout": precision_score(y_true, y_pred, zero_division=0),
-        "recall_dropout": recall_score(y_true, y_pred, zero_division=0),
-        "f1_dropout": f1_score(y_true, y_pred, zero_division=0),
-        "confusion_matrix": cm.tolist(),  # [[TN, FP], [FN, TP]]
+        name: {
+            "lower": float(np.nanpercentile(values, 2.5)),
+            "upper": float(np.nanpercentile(values, 97.5)),
+        }
+        for name, values in samples.items()
     }
 
 
-def threshold_sweep(y_true, risco_evasao, thresholds=range(30, 81, 5)):
-    return [metrics_at_threshold(y_true, risco_evasao, t) for t in thresholds]
+def subgroup_metrics(df: pd.DataFrame, *, threshold: float, minimum_size: int = 30) -> pd.DataFrame:
+    """Calcula diagnosticos descritivos; grupos pequenos sao apenas sinalizados."""
+
+    working = df.copy()
+    working["faixa_etaria"] = pd.cut(
+        working["idade"], bins=[16, 22, 30, 40, np.inf],
+        labels=["17-22", "23-30", "31-40", "41+"], include_lowest=True,
+    )
+    group_columns = {
+        "faixa_etaria": "faixa_etaria",
+        "turno_noturno": "noturno",
+        "bolsa": "scholarship",
+        "internacional": "internacional",
+        "deslocado": "deslocado",
+    }
+    records: list[dict[str, Any]] = []
+    for dimension, column in group_columns.items():
+        for value, group in working.groupby(column, observed=True, dropna=False):
+            y = group["y_true"].to_numpy(dtype=np.int64)
+            risk = group["risco_evasao"].to_numpy(dtype=np.float64)
+            metrics = metrics_at_threshold(y, risk, threshold)
+            has_dropout = bool(np.any(y == 1))
+            records.append(
+                {
+                    "dimension": dimension,
+                    "group": str(value),
+                    "n": len(group),
+                    "sufficient": len(group) >= minimum_size,
+                    "precision_dropout": metrics.precision_dropout,
+                    "recall_dropout": metrics.recall_dropout if has_dropout else float("nan"),
+                    "false_negative_rate": 1.0 - metrics.recall_dropout if has_dropout else float("nan"),
+                    "f2_dropout": metrics.f2_dropout if has_dropout else float("nan"),
+                    "accuracy": metrics.accuracy,
+                }
+            )
+    return pd.DataFrame.from_records(records)
 
 
-def best_threshold(sweep_results, key="f1_dropout"):
-    return max(sweep_results, key=lambda r: r[key])
+def representative_cases(df: pd.DataFrame, *, threshold: float) -> Mapping[str, int]:
+    predicted = predict_class(df["risco_evasao"].to_numpy(dtype=np.float64), threshold)
+    y = df["y_true"].to_numpy(dtype=np.int64)
+    risk = df["risco_evasao"].to_numpy(dtype=np.float64)
+    definitions = {
+        "verdadeiro_positivo": ((y == 1) & (predicted == 1), "max"),
+        "verdadeiro_negativo": ((y == 0) & (predicted == 0), "min"),
+        "falso_positivo": ((y == 0) & (predicted == 1), "max"),
+        "falso_negativo": ((y == 1) & (predicted == 0), "min"),
+    }
+    selected: dict[str, int] = {}
+    for label, (mask, direction) in definitions.items():
+        positions = np.flatnonzero(mask)
+        if not len(positions):
+            continue
+        local = risk[positions]
+        position = positions[int(np.argmax(local) if direction == "max" else np.argmin(local))]
+        selected[label] = int(df.iloc[position]["row_id"])
+    return selected
 
 
-def plot_confusion_matrix(cm, threshold, path):
-    cm = np.asarray(cm)
-    fig, ax = plt.subplots(figsize=(4, 4))
-    im = ax.imshow(cm, cmap="Blues")
-    labels = ["Graduate", "Dropout"]
-    ax.set_xticks([0, 1]); ax.set_xticklabels(labels)
-    ax.set_yticks([0, 1]); ax.set_yticklabels(labels)
-    ax.set_xlabel("Previsto"); ax.set_ylabel("Real")
-    ax.set_title(f"Matriz de confusao (limiar={threshold})")
-    for i in range(2):
-        for j in range(2):
-            ax.text(j, i, str(cm[i][j]), ha="center", va="center",
-                     color="white" if cm[i][j] > cm.max() / 2 else "black")
-    fig.colorbar(im)
-    fig.tight_layout()
-    fig.savefig(path)
-    plt.close(fig)
-
-
-def plot_risk_distribution(df, threshold, path):
-    fig, ax = plt.subplots(figsize=(7, 4))
-    for label, color in [("Graduate", "tab:green"), ("Dropout", "tab:red")]:
-        subset = df.loc[df["Target"] == label, "risco_evasao"]
-        ax.hist(subset, bins=30, alpha=0.6, label=label, color=color)
-    ax.axvline(threshold, color="black", linestyle="--", label=f"limiar={threshold}")
-    ax.set_xlabel("RISCO_EVASAO (0-100)")
-    ax.set_ylabel("numero de alunos")
-    ax.set_title("Distribuicao do risco previsto por classe real")
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(path)
-    plt.close(fig)
-
-
-def plot_threshold_sweep(sweep_results, path):
-    thresholds = [r["threshold"] for r in sweep_results]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.plot(thresholds, [r["accuracy"] for r in sweep_results], marker="o", label="acuracia")
-    ax.plot(thresholds, [r["precision_dropout"] for r in sweep_results], marker="o", label="precisao (Dropout)")
-    ax.plot(thresholds, [r["recall_dropout"] for r in sweep_results], marker="o", label="recall (Dropout)")
-    ax.plot(thresholds, [r["f1_dropout"] for r in sweep_results], marker="o", label="F1 (Dropout)")
-    ax.set_xlabel("limiar de risco")
-    ax.set_ylabel("metrica")
-    ax.set_title("Sensibilidade das metricas ao limiar de decisao")
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(path)
-    plt.close(fig)
-
-
-def save_json(obj, path):
-    with open(path, "w") as f:
-        json.dump(obj, f, indent=2, ensure_ascii=False)
+def save_json(value: Any, path: str | Path) -> None:
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with destination.open("w", encoding="utf-8") as handle:
+        json.dump(value, handle, ensure_ascii=False, indent=2, allow_nan=False)

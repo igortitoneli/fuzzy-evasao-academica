@@ -1,0 +1,17 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.14"
+files = ["src", "main.py"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_return_any = true
+exclude = ["evasao_academica.ipynb"]
+
+[[tool.mypy.overrides]]
+module = ["skfuzzy", "skfuzzy.*", "ucimlrepo", "ucimlrepo.*", "seaborn", "seaborn.*", "sklearn", "sklearn.*"]
+ignore_missing_imports = true
