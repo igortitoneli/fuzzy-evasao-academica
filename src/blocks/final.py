@@ -7,8 +7,15 @@ from ..membership import FuzzyVariable, trapmf, trimf
 
 def _risk_variable(name: str, label: str) -> FuzzyVariable:
     return FuzzyVariable(
-        name, label, 0.0, 100.0,
-        {"baixo": trapmf((0.0, 0.0, 30.0, 45.0)), "medio": trimf((30.0, 50.0, 70.0)), "alto": trapmf((55.0, 70.0, 100.0, 100.0))},
+        name,
+        label,
+        0.0,
+        100.0,
+        {
+            "baixo": trapmf((0.0, 0.0, 30.0, 45.0)),
+            "medio": trimf((30.0, 45.0, 70.0)),
+            "alto": trapmf((45.0, 70.0, 100.0, 100.0)),
+        },
     )
 
 

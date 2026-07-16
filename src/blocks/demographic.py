@@ -8,10 +8,26 @@ from ..membership import FuzzyVariable, binary_terms, trapmf, trimf
 def variables() -> tuple[FuzzyVariable, ...]:
     return (
         FuzzyVariable(
-            "idade", "Idade no ingresso", 17.0, 70.0,
-            {"jovem": trapmf((17.0, 17.0, 20.0, 25.0)), "adulta": trimf((23.0, 31.5, 40.0)), "mais_velha": trapmf((35.0, 45.0, 70.0, 70.0))},
+            "idade",
+            "Idade no ingresso",
+            17.0,
+            70.0,
+            {
+                "jovem": trapmf((17.0, 17.0, 20.0, 25.0)),
+                "adulta": trimf((20.0, 25.0, 40.0)),
+                "mais_velha": trapmf((15.0, 40.0, 70.0, 70.0)),
+            },
         ),
         FuzzyVariable("deslocado", "Deslocado", 0.0, 1.0, binary_terms(), binary=True),
-        FuzzyVariable("noturno", "Curso noturno", 0.0, 1.0, binary_terms(), binary=True),
-        FuzzyVariable("internacional", "Estudante internacional", 0.0, 1.0, binary_terms(), binary=True),
+        FuzzyVariable(
+            "noturno", "Curso noturno", 0.0, 1.0, binary_terms(), binary=True
+        ),
+        FuzzyVariable(
+            "internacional",
+            "Estudante internacional",
+            0.0,
+            1.0,
+            binary_terms(),
+            binary=True,
+        ),
     )

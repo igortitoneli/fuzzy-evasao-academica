@@ -8,15 +8,36 @@ from ..membership import FuzzyVariable, trapmf, trimf
 def variables() -> tuple[FuzzyVariable, ...]:
     return (
         FuzzyVariable(
-            "nota_academica", "Nota academica", 0.0, 20.0,
-            {"baixa": trapmf((0.0, 0.0, 8.0, 10.0)), "media": trimf((8.0, 11.5, 15.0)), "alta": trapmf((13.0, 15.0, 20.0, 20.0))},
+            "nota_academica",
+            "Nota academica",
+            0.0,
+            20.0,
+            {
+                "baixa": trapmf((0.0, 0.0, 8.0, 10.0)),
+                "media": trimf((8.0, 10.5, 15.0)),
+                "alta": trapmf((10.0, 15.0, 20.0, 20.0)),
+            },
         ),
         FuzzyVariable(
-            "aprovadas", "Unidades aprovadas", 0.0, 26.0,
-            {"poucas": trapmf((0.0, 0.0, 1.0, 2.0)), "medias": trimf((2.0, 3.5, 5.0)), "muitas": trapmf((5.0, 7.0, 26.0, 26.0))},
+            "aprovadas",
+            "Unidades aprovadas",
+            0.0,
+            26.0,
+            {
+                "poucas": trapmf((0.0, 0.0, 1.0, 2.0)),
+                "medias": trimf((1.0, 2.0, 5.0)),
+                "muitas": trapmf((2.0, 5.0, 26.0, 26.0)),
+            },
         ),
         FuzzyVariable(
-            "sem_avaliacao", "Unidades sem avaliacao", 0.0, 12.0,
-            {"poucas": trapmf((0.0, 0.0, 0.5, 1.0)), "medias": trimf((1.0, 2.0, 3.0)), "muitas": trapmf((3.0, 4.0, 12.0, 12.0))},
+            "sem_avaliacao",
+            "Unidades sem avaliacao",
+            0.0,
+            12.0,
+            {
+                "poucas": trapmf((0.0, 0.0, 0.5, 1.0)),
+                "medias": trimf((0.5, 1.0, 3.0)),
+                "muitas": trapmf((1.0, 3.0, 12.0, 12.0)),
+            },
         ),
     )
