@@ -110,9 +110,9 @@ def binary_terms() -> Mapping[str, MembershipFunction]:
 
 
 OUTPUT_TERMS: Mapping[str, MembershipFunction] = {
-    "baixo": trapmf((0.0, 0.0, 30.0, 45.0)),
+    "baixo": trapmf((0.0, 0.0, 30.0, 50.0)),
     "medio": trimf((30.0, 50.0, 70.0)),
-    "alto": trapmf((55.0, 70.0, 100.0, 100.0)),
+    "alto": trapmf((50.0, 70.0, 100.0, 100.0)),
 }
 OUTPUT_CURVES: Mapping[str, FloatArray] = {
     name: membership.evaluate(OUTPUT_UNIVERSE)
@@ -136,6 +136,47 @@ def fuzzify_inputs(
             for term, membership in variable.terms.items()
         }
     return result
+
+
+def validate_membership_coverage(
+    variables: Sequence[FuzzyVariable],
+    *,
+    minimum_coverage: float = 0.49,
+    resolution: int = 10_001,
+) -> None:
+    """Garante que nenhuma variavel tenha buracos entre termos linguisticos.
+
+    Uma particao triangular/trapezoidal bem conectada cruza termos vizinhos
+    em pertinencia 0,5. A tolerancia 0,49 absorve apenas o erro da grade
+    numerica usada na verificacao.
+    """
+
+    if not 0.0 < minimum_coverage <= 1.0:
+        raise ValueError("minimum_coverage precisa estar entre 0 e 1")
+    if resolution < 2:
+        raise ValueError("resolution precisa ser pelo menos 2")
+
+    for variable in variables:
+        universe = np.linspace(
+            variable.minimum,
+            variable.maximum,
+            resolution,
+            dtype=np.float64,
+        )
+        term_degrees = np.vstack(
+            [membership.evaluate(universe) for membership in variable.terms.values()]
+        )
+        coverage = np.max(term_degrees, axis=0)
+        weakest_index = int(np.argmin(coverage))
+        weakest_coverage = float(coverage[weakest_index])
+        if weakest_coverage < minimum_coverage:
+            weakest_value = float(universe[weakest_index])
+            raise ValueError(
+                f"A variavel '{variable.name}' possui cobertura fuzzy insuficiente "
+                f"em {weakest_value:.4f}: maior pertinencia={weakest_coverage:.4f}; "
+                f"esperado >= {minimum_coverage:.2f}. Ajuste os termos para se "
+                "encontrarem aproximadamente em 0.5."
+            )
 
 
 def _rule_strengths(
@@ -223,6 +264,7 @@ def induce_rules(
 ) -> MamdaniModel:
     """Induz uma base completa de candidatos por grade fuzzy ponderada."""
 
+    validate_membership_coverage(variables)
     y = np.asarray(target, dtype=np.float64)
     if y.ndim != 1 or len(y) == 0:
         raise ValueError("O alvo precisa ser um vetor nao vazio")

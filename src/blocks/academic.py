@@ -14,7 +14,7 @@ def variables() -> tuple[FuzzyVariable, ...]:
             20.0,
             {
                 "baixa": trapmf((0.0, 0.0, 8.0, 10.0)),
-                "media": trimf((8.0, 10.5, 15.0)),
+                "media": trimf((8.0, 10.0, 15.0)),
                 "alta": trapmf((10.0, 15.0, 20.0, 20.0)),
             },
         ),

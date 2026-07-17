@@ -38,7 +38,7 @@
     "x_variable": "risco_academico",
     "y_variable": "risco_social",
     "fixed_values": {
-      "risco_demografico": 18.999955555555555
+      "risco_demografico": 20.416625000000003
     },
     "resolution": [
       20,

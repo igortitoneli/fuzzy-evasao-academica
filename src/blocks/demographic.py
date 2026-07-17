@@ -15,7 +15,7 @@ def variables() -> tuple[FuzzyVariable, ...]:
             {
                 "jovem": trapmf((17.0, 17.0, 20.0, 25.0)),
                 "adulta": trimf((20.0, 25.0, 40.0)),
-                "mais_velha": trapmf((15.0, 40.0, 70.0, 70.0)),
+                "mais_velha": trapmf((25.0, 40.0, 70.0, 70.0)),
             },
         ),
         FuzzyVariable("deslocado", "Deslocado", 0.0, 1.0, binary_terms(), binary=True),

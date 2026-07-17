@@ -7,10 +7,14 @@ from src.membership import (
     FuzzyRule,
     FuzzyVariable,
     MamdaniModel,
+    OUTPUT_TERMS,
     binary_terms,
     induce_rules,
     trapmf,
+    trimf,
+    validate_membership_coverage,
 )
+from src.blocks import academic, demographic, final, social
 
 
 def test_memberships_are_bounded_and_keep_shape() -> None:
@@ -18,6 +22,37 @@ def test_memberships_are_bounded_and_keep_shape() -> None:
     degrees = trapmf((0.0, 0.0, 4.0, 6.0)).evaluate(values)
     assert degrees.shape == values.shape
     assert np.all((degrees >= 0.0) & (degrees <= 1.0))
+
+
+def test_all_project_variables_have_no_membership_gaps() -> None:
+    variables = (
+        *academic.variables(),
+        *social.variables(),
+        *demographic.variables(),
+        *final.variables(),
+        FuzzyVariable("saida", "Risco de saida", 0.0, 100.0, OUTPUT_TERMS),
+    )
+    validate_membership_coverage(variables)
+
+
+def test_training_rejects_a_variable_with_a_membership_gap() -> None:
+    variable = FuzzyVariable(
+        "com_buraco",
+        "Com buraco",
+        0.0,
+        10.0,
+        {
+            "baixo": trapmf((0.0, 0.0, 2.0, 4.0)),
+            "alto": trimf((6.0, 8.0, 10.0)),
+        },
+    )
+    with pytest.raises(ValueError, match="cobertura fuzzy insuficiente"):
+        induce_rules(
+            "invalido",
+            (variable,),
+            {"com_buraco": np.asarray([1.0, 9.0])},
+            np.asarray([0.0, 1.0]),
+        )
 
 
 def test_symmetric_mamdani_output_has_centroid_50() -> None:
