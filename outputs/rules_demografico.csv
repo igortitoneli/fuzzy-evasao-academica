@@ -1,19 +1,19 @@
 rule,consequent,support,estimated_risk,weight
 SE idade=jovem E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=baixo,baixo,512.0,26.99378928322132,1.0
 SE idade=jovem E deslocado=nao E noturno=nao E internacional=sim ENTAO risco=baixo,baixo,12.0,18.57582702502489,1.0
-SE idade=jovem E deslocado=nao E noturno=sim E internacional=nao ENTAO risco=baixo,baixo,21.4,36.961706796417545,0.6519146601791228
+SE idade=jovem E deslocado=nao E noturno=sim E internacional=nao ENTAO risco=baixo,baixo,21.4,36.961706796417545,0.5358862135721637
 SE idade=jovem E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=baixo,baixo,1093.1999999999998,28.406291257899678,1.0
 SE idade=jovem E deslocado=sim E noturno=nao E internacional=sim ENTAO risco=baixo,baixo,26.799999999999997,23.138020736648528,1.0
-SE idade=jovem E deslocado=sim E noturno=sim E internacional=nao ENTAO risco=baixo,baixo,9.2,32.097821086297394,0.8951089456851303
-SE idade=adulta E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=alto,alto,232.26666666666665,63.7361157323353,0.686805786616765
+SE idade=jovem E deslocado=sim E noturno=sim E internacional=nao ENTAO risco=baixo,baixo,9.2,32.097821086297394,0.8601452609135071
+SE idade=adulta E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=alto,alto,232.26666666666665,63.7361157323353,0.58240771548902
 SE idade=adulta E deslocado=nao E noturno=nao E internacional=sim ENTAO risco=medio,medio,6.466666666666667,58.353697042914796,0.5823151478542602
 SE idade=adulta E deslocado=nao E noturno=sim E internacional=nao ENTAO risco=medio,medio,94.4,53.41169409214041,0.8294152953929796
 SE idade=adulta E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=medio,medio,141.86666666666667,58.48244933789438,0.575877533105281
-SE idade=adulta E deslocado=sim E noturno=nao E internacional=sim ENTAO risco=baixo,baixo,5.333333333333334,37.6570057508474,0.6171497124576302
+SE idade=adulta E deslocado=sim E noturno=nao E internacional=sim ENTAO risco=baixo,baixo,5.333333333333334,37.6570057508474,0.4895329499435069
 SE idade=adulta E deslocado=sim E noturno=sim E internacional=nao ENTAO risco=medio,medio,24.133333333333333,58.20786245167356,0.5896068774163219
-SE idade=mais_velha E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=alto,alto,156.73333333333335,68.06959434929158,0.9034797174645789
+SE idade=mais_velha E deslocado=nao E noturno=nao E internacional=nao ENTAO risco=alto,alto,156.73333333333335,68.06959434929158,0.8713062899527718
 SE idade=mais_velha E deslocado=nao E noturno=nao E internacional=sim ENTAO risco=medio,medio,5.533333333333333,57.19516386950219,0.6402418065248906
 SE idade=mais_velha E deslocado=nao E noturno=sim E internacional=nao ENTAO risco=medio,medio,125.2,46.10181049225876,0.8050905246129378
-SE idade=mais_velha E deslocado=nao E noturno=sim E internacional=sim ENTAO risco=baixo,baixo,1.4,39.96704053522235,0.5016479732388823
-SE idade=mais_velha E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=alto,alto,45.93333333333334,66.80214121908553,0.8401070609542763
+SE idade=mais_velha E deslocado=nao E noturno=sim E internacional=sim ENTAO risco=medio,medio,1.4,39.96704053522235,0.4983520267611176
+SE idade=mais_velha E deslocado=sim E noturno=nao E internacional=nao ENTAO risco=alto,alto,45.93333333333334,66.80214121908553,0.7868094146057019
 SE idade=mais_velha E deslocado=sim E noturno=sim E internacional=nao ENTAO risco=alto,alto,25.666666666666664,72.9061649812638,1.0

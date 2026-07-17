@@ -69,7 +69,7 @@
     "consequent": "baixo",
     "support": 21.4,
     "estimated_risk": 36.961706796417545,
-    "weight": 0.6519146601791228
+    "weight": 0.5358862135721637
   },
   {
     "antecedents": [
@@ -141,7 +141,7 @@
     "consequent": "baixo",
     "support": 9.2,
     "estimated_risk": 32.097821086297394,
-    "weight": 0.8951089456851303
+    "weight": 0.8601452609135071
   },
   {
     "antecedents": [
@@ -165,7 +165,7 @@
     "consequent": "alto",
     "support": 232.26666666666665,
     "estimated_risk": 63.7361157323353,
-    "weight": 0.686805786616765
+    "weight": 0.58240771548902
   },
   {
     "antecedents": [
@@ -261,7 +261,7 @@
     "consequent": "baixo",
     "support": 5.333333333333334,
     "estimated_risk": 37.6570057508474,
-    "weight": 0.6171497124576302
+    "weight": 0.4895329499435069
   },
   {
     "antecedents": [
@@ -309,7 +309,7 @@
     "consequent": "alto",
     "support": 156.73333333333335,
     "estimated_risk": 68.06959434929158,
-    "weight": 0.9034797174645789
+    "weight": 0.8713062899527718
   },
   {
     "antecedents": [
@@ -378,10 +378,10 @@
         "sim"
       ]
     ],
-    "consequent": "baixo",
+    "consequent": "medio",
     "support": 1.4,
     "estimated_risk": 39.96704053522235,
-    "weight": 0.5016479732388823
+    "weight": 0.4983520267611176
   },
   {
     "antecedents": [
@@ -405,7 +405,7 @@
     "consequent": "alto",
     "support": 45.93333333333334,
     "estimated_risk": 66.80214121908553,
-    "weight": 0.8401070609542763
+    "weight": 0.7868094146057019
   },
   {
     "antecedents": [

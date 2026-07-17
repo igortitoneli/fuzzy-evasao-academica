@@ -15,8 +15,8 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 1151.1755103097114,
-    "estimated_risk": 8.24913141688817,
+    "support": 1134.0542656229827,
+    "estimated_risk": 8.373584017716999,
     "weight": 1.0
   },
   {
@@ -35,8 +35,8 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 154.17972159699252,
-    "estimated_risk": 17.339657010025512,
+    "support": 150.57509466310637,
+    "estimated_risk": 17.06647227221155,
     "weight": 1.0
   },
   {
@@ -55,8 +55,8 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 127.64750622198457,
-    "estimated_risk": 21.27994656516157,
+    "support": 120.18156206057688,
+    "estimated_risk": 21.78121642982157,
     "weight": 1.0
   },
   {
@@ -75,8 +75,8 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 100.98411232207758,
-    "estimated_risk": 19.91977264098667,
+    "support": 134.35507740662777,
+    "estimated_risk": 18.338051385255167,
     "weight": 1.0
   },
   {
@@ -95,8 +95,8 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 36.139153055315205,
-    "estimated_risk": 28.490599422584907,
+    "support": 46.98371336201744,
+    "estimated_risk": 28.034025551180758,
     "weight": 1.0
   },
   {
@@ -115,9 +115,9 @@
       ]
     ],
     "consequent": "baixo",
-    "support": 29.971386919852584,
-    "estimated_risk": 34.02257680004266,
-    "weight": 0.7988711599978672
+    "support": 37.025168682534456,
+    "estimated_risk": 32.27194505714829,
+    "weight": 0.8485369961901142
   },
   {
     "antecedents": [
@@ -128,6 +128,66 @@
       [
         "risco_social",
         "alto"
+      ],
+      [
+        "risco_demografico",
+        "baixo"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 38.22877000736871,
+    "estimated_risk": 68.60765389349976,
+    "weight": 0.9071769262333172
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 16.056751022750824,
+    "estimated_risk": 73.59909893974125,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "baixo"
+      ],
+      [
+        "risco_social",
+        "alto"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 25.328772406407115,
+    "estimated_risk": 74.64374410610645,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "baixo"
       ],
       [
         "risco_demografico",
@@ -135,49 +195,9 @@
       ]
     ],
     "consequent": "medio",
-    "support": 45.66846852214991,
-    "estimated_risk": 59.956526547773926,
-    "weight": 0.5021736726113037
-  },
-  {
-    "antecedents": [
-      [
-        "risco_academico",
-        "baixo"
-      ],
-      [
-        "risco_social",
-        "alto"
-      ],
-      [
-        "risco_demografico",
-        "medio"
-      ]
-    ],
-    "consequent": "alto",
-    "support": 17.27863963882917,
-    "estimated_risk": 70.30791006258961,
-    "weight": 1.0
-  },
-  {
-    "antecedents": [
-      [
-        "risco_academico",
-        "baixo"
-      ],
-      [
-        "risco_social",
-        "alto"
-      ],
-      [
-        "risco_demografico",
-        "alto"
-      ]
-    ],
-    "consequent": "alto",
-    "support": 26.8172747199527,
-    "estimated_risk": 75.38383626608,
-    "weight": 1.0
+    "support": 91.00849499134675,
+    "estimated_risk": 47.35308800439583,
+    "weight": 0.8676544002197915
   },
   {
     "antecedents": [
@@ -188,6 +208,46 @@
       [
         "risco_social",
         "baixo"
+      ],
+      [
+        "risco_demografico",
+        "medio"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 20.74447040714302,
+    "estimated_risk": 66.34220820940628,
+    "weight": 0.7561472139604187
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "baixo"
+      ],
+      [
+        "risco_demografico",
+        "alto"
+      ]
+    ],
+    "consequent": "alto",
+    "support": 28.497261899474346,
+    "estimated_risk": 71.56031601002456,
+    "weight": 1.0
+  },
+  {
+    "antecedents": [
+      [
+        "risco_academico",
+        "medio"
+      ],
+      [
+        "risco_social",
+        "medio"
       ],
       [
         "risco_demografico",
@@ -195,69 +255,9 @@
       ]
     ],
     "consequent": "medio",
-    "support": 96.63681673897804,
-    "estimated_risk": 47.03242787665787,
-    "weight": 0.8516213938328935
-  },
-  {
-    "antecedents": [
-      [
-        "risco_academico",
-        "medio"
-      ],
-      [
-        "risco_social",
-        "baixo"
-      ],
-      [
-        "risco_demografico",
-        "medio"
-      ]
-    ],
-    "consequent": "alto",
-    "support": 21.490074798075987,
-    "estimated_risk": 65.68270240715366,
-    "weight": 0.7841351203576827
-  },
-  {
-    "antecedents": [
-      [
-        "risco_academico",
-        "medio"
-      ],
-      [
-        "risco_social",
-        "baixo"
-      ],
-      [
-        "risco_demografico",
-        "alto"
-      ]
-    ],
-    "consequent": "alto",
-    "support": 30.99147035991101,
-    "estimated_risk": 71.49633603221324,
-    "weight": 1.0
-  },
-  {
-    "antecedents": [
-      [
-        "risco_academico",
-        "medio"
-      ],
-      [
-        "risco_social",
-        "medio"
-      ],
-      [
-        "risco_demografico",
-        "baixo"
-      ]
-    ],
-    "consequent": "alto",
-    "support": 25.242913637286556,
-    "estimated_risk": 61.8871881684536,
-    "weight": 0.5943594084226799
+    "support": 28.130266424191046,
+    "estimated_risk": 59.44407286661553,
+    "weight": 0.5277963566692236
   },
   {
     "antecedents": [
@@ -275,9 +275,9 @@
       ]
     ],
     "consequent": "alto",
-    "support": 7.890436702774862,
-    "estimated_risk": 62.67257764861412,
-    "weight": 0.6336288824307061
+    "support": 10.104520840993235,
+    "estimated_risk": 62.43634970203916,
+    "weight": 0.4957566468026106
   },
   {
     "antecedents": [
@@ -295,9 +295,9 @@
       ]
     ],
     "consequent": "alto",
-    "support": 11.980636070770645,
-    "estimated_risk": 63.33113245563434,
-    "weight": 0.666556622781717
+    "support": 13.826754332486722,
+    "estimated_risk": 65.38457408308624,
+    "weight": 0.6923049388724157
   },
   {
     "antecedents": [
@@ -315,8 +315,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 22.242324138332215,
-    "estimated_risk": 86.73778977569367,
+    "support": 19.86551952288749,
+    "estimated_risk": 87.76575167494225,
     "weight": 1.0
   },
   {
@@ -335,8 +335,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 7.74923995117342,
-    "estimated_risk": 76.0301980173398,
+    "support": 6.9066702970658636,
+    "estimated_risk": 74.45037672290773,
     "weight": 1.0
   },
   {
@@ -355,8 +355,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 11.44645138671266,
-    "estimated_risk": 77.75154934494917,
+    "support": 11.078178757246521,
+    "estimated_risk": 77.39780685114603,
     "weight": 1.0
   },
   {
@@ -375,8 +375,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 214.52895567269422,
-    "estimated_risk": 79.65620672668196,
+    "support": 208.86871106728327,
+    "estimated_risk": 79.19664414261605,
     "weight": 1.0
   },
   {
@@ -395,8 +395,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 55.35311158059472,
-    "estimated_risk": 90.25741504482964,
+    "support": 54.13005231414701,
+    "estimated_risk": 90.60045639673177,
     "weight": 1.0
   },
   {
@@ -415,8 +415,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 102.86721177588397,
-    "estimated_risk": 94.27969030362834,
+    "support": 97.7573333179501,
+    "estimated_risk": 94.05910567336961,
     "weight": 1.0
   },
   {
@@ -435,8 +435,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 42.120026137665384,
-    "estimated_risk": 88.6665020802153,
+    "support": 53.439849205612816,
+    "estimated_risk": 89.81370903859886,
     "weight": 1.0
   },
   {
@@ -455,8 +455,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 19.443191708108877,
-    "estimated_risk": 86.04362692977531,
+    "support": 23.834788809197605,
+    "estimated_risk": 87.57638979764897,
     "weight": 1.0
   },
   {
@@ -475,8 +475,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 43.05460162307976,
-    "estimated_risk": 92.92237874673678,
+    "support": 49.25356277506309,
+    "estimated_risk": 93.4172567079863,
     "weight": 1.0
   },
   {
@@ -495,8 +495,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 77.02260226051438,
-    "estimated_risk": 93.85278049368465,
+    "support": 73.67708630395822,
+    "estimated_risk": 93.59138773102721,
     "weight": 1.0
   },
   {
@@ -515,8 +515,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 50.19519712159679,
-    "estimated_risk": 94.48845268358421,
+    "support": 50.76036804514929,
+    "estimated_risk": 94.54431612918593,
     "weight": 1.0
   },
   {
@@ -535,8 +535,8 @@
       ]
     ],
     "consequent": "alto",
-    "support": 86.74387006553582,
-    "estimated_risk": 96.68412788388733,
+    "support": 84.60427209370704,
+    "estimated_risk": 96.60495048432024,
     "weight": 1.0
   }
 ]
