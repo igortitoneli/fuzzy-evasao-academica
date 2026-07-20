@@ -57,6 +57,22 @@ def test_heatmap_has_requested_resolution(synthetic_students: pd.DataFrame) -> N
     assert result.fixed_values.keys() == {"sem_avaliacao"}
 
 
+def test_heatmap_can_keep_binary_axis_discrete(synthetic_students: pd.DataFrame) -> None:
+    split = evaluate.stratified_split(synthetic_students)
+    pipeline = fit_pipeline(split.train, folds=3)
+    result = build_heatmap(
+        pipeline.demographic_model,
+        name="demografico",
+        x_variable="idade",
+        y_variable="deslocado",
+        fixed_values={"noturno": 0.0, "internacional": 0.0},
+        resolution=20,
+        y_resolution=2,
+    )
+    assert result.risks.shape == (2, 20)
+    np.testing.assert_array_equal(result.y_values, np.asarray([0.0, 1.0]))
+
+
 def test_small_subgroups_are_marked_insufficient(synthetic_students: pd.DataFrame) -> None:
     frame = synthetic_students.iloc[:20].copy()
     frame["risco_evasao"] = np.linspace(0.0, 100.0, len(frame))

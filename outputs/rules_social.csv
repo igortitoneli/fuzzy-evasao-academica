@@ -1,7 +1,7 @@
 rule,consequent,support,estimated_risk,weight
 SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=baixo ENTAO risco=medio,medio,405.0,43.4043635595742,0.67021817797871
-SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=medio ENTAO risco=baixo,baixo,686.5,37.08718591384733,0.5275209390768448
-SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=alto ENTAO risco=baixo,baixo,343.5,33.416898305381416,0.772206779641239
+SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=medio ENTAO risco=baixo,baixo,686.5,37.08718591384733,0.6456407043076335
+SE debtor=nao E tuition_late=nao E scholarship=nao E capital_educacional=alto ENTAO risco=baixo,baixo,343.5,33.416898305381416,0.8291550847309292
 SE debtor=nao E tuition_late=nao E scholarship=sim E capital_educacional=baixo ENTAO risco=baixo,baixo,192.5,10.105261060381888,1.0
 SE debtor=nao E tuition_late=nao E scholarship=sim E capital_educacional=medio ENTAO risco=baixo,baixo,376.0,12.062438476182214,1.0
 SE debtor=nao E tuition_late=nao E scholarship=sim E capital_educacional=alto ENTAO risco=baixo,baixo,70.5,15.838265687753946,1.0
@@ -11,15 +11,15 @@ SE debtor=nao E tuition_late=sim E scholarship=nao E capital_educacional=alto EN
 SE debtor=nao E tuition_late=sim E scholarship=sim E capital_educacional=baixo ENTAO risco=medio,medio,3.5,52.4457716971086,0.8777114151445702
 SE debtor=nao E tuition_late=sim E scholarship=sim E capital_educacional=medio ENTAO risco=medio,medio,3.5,40.681065814755655,0.5340532907377827
 SE debtor=nao E tuition_late=sim E scholarship=sim E capital_educacional=alto ENTAO risco=medio,medio,2.0,42.25557991791758,0.6127789958958789
-SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=baixo ENTAO risco=medio,medio,26.0,61.15448578791687,0.44227571060415655
+SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=baixo ENTAO risco=alto,alto,26.0,61.15448578791687,0.5577242893958434
 SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=medio ENTAO risco=medio,medio,44.5,56.48058705909945,0.6759706470450275
 SE debtor=sim E tuition_late=nao E scholarship=nao E capital_educacional=alto ENTAO risco=medio,medio,25.5,55.599641292636825,0.7200179353681587
-SE debtor=sim E tuition_late=nao E scholarship=sim E capital_educacional=baixo ENTAO risco=baixo,baixo,12.5,31.187946252881314,0.9208035831412457
+SE debtor=sim E tuition_late=nao E scholarship=sim E capital_educacional=baixo ENTAO risco=baixo,baixo,12.5,31.187946252881314,0.9406026873559343
 SE debtor=sim E tuition_late=nao E scholarship=sim E capital_educacional=medio ENTAO risco=baixo,baixo,21.5,22.4826060160537,1.0
-SE debtor=sim E tuition_late=nao E scholarship=sim E capital_educacional=alto ENTAO risco=baixo,baixo,5.0,34.578905942542306,0.6947396038305129
+SE debtor=sim E tuition_late=nao E scholarship=sim E capital_educacional=alto ENTAO risco=baixo,baixo,5.0,34.578905942542306,0.7710547028728847
 SE debtor=sim E tuition_late=sim E scholarship=nao E capital_educacional=baixo ENTAO risco=alto,alto,40.0,88.79531243167607,1.0
 SE debtor=sim E tuition_late=sim E scholarship=nao E capital_educacional=medio ENTAO risco=alto,alto,74.0,91.0859374610813,1.0
 SE debtor=sim E tuition_late=sim E scholarship=nao E capital_educacional=alto ENTAO risco=alto,alto,27.0,90.49340810704447,1.0
 SE debtor=sim E tuition_late=sim E scholarship=sim E capital_educacional=baixo ENTAO risco=medio,medio,4.5,57.451479939518215,0.6274260030240892
-SE debtor=sim E tuition_late=sim E scholarship=sim E capital_educacional=medio ENTAO risco=alto,alto,7.0,66.3157549521186,0.7543836634745731
+SE debtor=sim E tuition_late=sim E scholarship=sim E capital_educacional=medio ENTAO risco=alto,alto,7.0,66.3157549521186,0.8157877476059298
 SE debtor=sim E tuition_late=sim E scholarship=sim E capital_educacional=alto ENTAO risco=medio,medio,3.5,52.4457716971086,0.8777114151445702

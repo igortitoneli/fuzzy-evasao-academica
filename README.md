@@ -118,7 +118,8 @@ Quando `--threshold` é usado, `metrics.json` registra
 2. dados e separação experimental;
 3. conceitos fuzzy e arquitetura;
 4. funções de pertinência e regras aprendidas;
-5. quatro mapas de calor 20×20;
+5. superfícies acadêmicas e finais em três cenários e curvas sociais e
+   demográficas cujas linhas representam as combinações das entradas binárias;
 6. seleção do limiar na validação;
 7. resultado final no teste;
 8. explicações individuais e análise de erros;

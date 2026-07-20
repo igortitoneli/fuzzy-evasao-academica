@@ -1,5 +1,5 @@
 {
-  "academico": {
+  "academico_baixa": {
     "x_variable": "nota_academica",
     "y_variable": "aprovadas",
     "fixed_values": {
@@ -10,19 +10,77 @@
       20
     ]
   },
-  "social": {
-    "x_variable": "debtor",
-    "y_variable": "tuition_late",
+  "academico_media": {
+    "x_variable": "nota_academica",
+    "y_variable": "aprovadas",
     "fixed_values": {
-      "scholarship": 0.0,
-      "capital_educacional": 1.0
+      "sem_avaliacao": 1.0
     },
     "resolution": [
       20,
       20
     ]
   },
-  "demografico": {
+  "academico_alta": {
+    "x_variable": "nota_academica",
+    "y_variable": "aprovadas",
+    "fixed_values": {
+      "sem_avaliacao": 3.0
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  },
+  "social_sem_bolsa_mensalidade_em_dia": {
+    "x_variable": "capital_educacional",
+    "y_variable": "debtor",
+    "fixed_values": {
+      "scholarship": 0.0,
+      "tuition_late": 0.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "social_sem_bolsa_mensalidade_atrasada": {
+    "x_variable": "capital_educacional",
+    "y_variable": "debtor",
+    "fixed_values": {
+      "scholarship": 0.0,
+      "tuition_late": 1.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "social_com_bolsa_mensalidade_em_dia": {
+    "x_variable": "capital_educacional",
+    "y_variable": "debtor",
+    "fixed_values": {
+      "scholarship": 1.0,
+      "tuition_late": 0.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "social_com_bolsa_mensalidade_atrasada": {
+    "x_variable": "capital_educacional",
+    "y_variable": "debtor",
+    "fixed_values": {
+      "scholarship": 1.0,
+      "tuition_late": 1.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "demografico_diurno_nacional": {
     "x_variable": "idade",
     "y_variable": "deslocado",
     "fixed_values": {
@@ -30,15 +88,73 @@
       "internacional": 0.0
     },
     "resolution": [
+      2,
+      20
+    ]
+  },
+  "demografico_diurno_internacional": {
+    "x_variable": "idade",
+    "y_variable": "deslocado",
+    "fixed_values": {
+      "noturno": 0.0,
+      "internacional": 1.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "demografico_noturno_nacional": {
+    "x_variable": "idade",
+    "y_variable": "deslocado",
+    "fixed_values": {
+      "noturno": 1.0,
+      "internacional": 0.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "demografico_noturno_internacional": {
+    "x_variable": "idade",
+    "y_variable": "deslocado",
+    "fixed_values": {
+      "noturno": 1.0,
+      "internacional": 1.0
+    },
+    "resolution": [
+      2,
+      20
+    ]
+  },
+  "final_baixo": {
+    "x_variable": "risco_academico",
+    "y_variable": "risco_social",
+    "fixed_values": {
+      "risco_demografico": 20.0
+    },
+    "resolution": [
       20,
       20
     ]
   },
-  "final": {
+  "final_medio": {
     "x_variable": "risco_academico",
     "y_variable": "risco_social",
     "fixed_values": {
-      "risco_demografico": 18.999955555555555
+      "risco_demografico": 50.0
+    },
+    "resolution": [
+      20,
+      20
+    ]
+  },
+  "final_alto": {
+    "x_variable": "risco_academico",
+    "y_variable": "risco_social",
+    "fixed_values": {
+      "risco_demografico": 80.0
     },
     "resolution": [
       20,

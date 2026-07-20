@@ -33,10 +33,11 @@ class HeatmapResult:
     risks: FloatArray
 
 
-def _save(fig: plt.Figure, path: str | Path) -> None:
+def _save(fig: plt.Figure, path: str | Path, *, tight_layout: bool = True) -> None:
     destination = Path(path)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    fig.tight_layout()
+    if tight_layout:
+        fig.tight_layout()
     fig.savefig(destination, dpi=160, bbox_inches="tight")
     plt.close(fig)
 
@@ -130,9 +131,40 @@ def plot_test_evaluation(
 ) -> None:
     destination = Path(output_dir)
     matrix = np.asarray(metrics.confusion_matrix, dtype=np.int64)
-    fig, ax = plt.subplots(figsize=(4.8, 4))
-    sns.heatmap(matrix, annot=True, fmt="d", cmap="Blues", cbar=False, ax=ax)
-    ax.set(xticklabels=["Graduate", "Dropout"], yticklabels=["Graduate", "Dropout"], xlabel="Previsto", ylabel="Real", title=f"Teste — limiar {metrics.threshold:.0f}")
+    row_totals = matrix.sum(axis=1, keepdims=True)
+    percentages = np.divide(
+        matrix,
+        row_totals,
+        out=np.zeros_like(matrix, dtype=np.float64),
+        where=row_totals != 0,
+    ) * 100.0
+    percentage_labels = np.asarray(
+        [[f"{value:.1f}%" for value in row] for row in percentages],
+        dtype=object,
+    )
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    sns.heatmap(matrix, annot=True, fmt="d", cmap="Blues", cbar=False, ax=axes[0])
+    sns.heatmap(
+        percentages,
+        annot=percentage_labels,
+        fmt="",
+        cmap="Blues",
+        vmin=0.0,
+        vmax=100.0,
+        cbar=False,
+        ax=axes[1],
+    )
+    for ax in axes:
+        ax.set(
+            xticklabels=["Graduate", "Dropout"],
+            yticklabels=["Graduate", "Dropout"],
+            xlabel="Previsto",
+            ylabel="Real",
+        )
+    axes[0].set_title(f"Contagens — limiar {metrics.threshold:.0f}")
+    axes[1].set_title("Percentual dentro da classe real")
+    fig.suptitle("Matriz de confusao no teste")
     _save(fig, destination / "confusion_matrix_test.png")
 
     false_positive_rate, true_positive_rate, _ = roc_curve(y_true, risk)
@@ -166,12 +198,19 @@ def build_heatmap(
     y_variable: str,
     fixed_values: Mapping[str, float],
     resolution: int = 20,
+    y_resolution: int | None = None,
 ) -> HeatmapResult:
     definitions = {variable.name: variable for variable in model.variables}
     x_definition = definitions[x_variable]
     y_definition = definitions[y_variable]
     x_values = np.linspace(x_definition.minimum, x_definition.maximum, resolution, dtype=np.float64)
-    y_values = np.linspace(y_definition.minimum, y_definition.maximum, resolution, dtype=np.float64)
+    resolved_y_resolution = y_resolution if y_resolution is not None else resolution
+    y_values = np.linspace(
+        y_definition.minimum,
+        y_definition.maximum,
+        resolved_y_resolution,
+        dtype=np.float64,
+    )
     x_grid, y_grid = np.meshgrid(x_values, y_values)
     inputs: dict[str, FloatArray] = {}
     for variable in model.variables:
@@ -181,7 +220,7 @@ def build_heatmap(
             inputs[variable.name] = y_grid.ravel()
         else:
             inputs[variable.name] = np.full(x_grid.size, fixed_values[variable.name], dtype=np.float64)
-    risks = model.infer(inputs).risks.reshape(resolution, resolution)
+    risks = model.infer(inputs).risks.reshape(resolved_y_resolution, resolution)
     return HeatmapResult(name, x_variable, y_variable, dict(fixed_values), x_values, y_values, risks)
 
 
@@ -213,33 +252,202 @@ def plot_heatmap(result: HeatmapResult, labels: Mapping[str, str], path: str | P
     _save(fig, path)
 
 
+def plot_heatmap_facets(
+    results: Sequence[HeatmapResult],
+    labels: Mapping[str, str],
+    path: str | Path,
+    *,
+    columns: int,
+    title: str,
+) -> None:
+    """Plota varias superficies continuas com a mesma escala de risco."""
+
+    rows = int(np.ceil(len(results) / columns))
+    fig, axes = plt.subplots(rows, columns, figsize=(6.2 * columns, 5.0 * rows), squeeze=False)
+    image = None
+    for ax, result in zip(axes.flat, results, strict=False):
+        image = ax.imshow(
+            result.risks,
+            origin="lower",
+            extent=(
+                float(result.x_values.min()), float(result.x_values.max()),
+                float(result.y_values.min()), float(result.y_values.max()),
+            ),
+            aspect="auto",
+            vmin=0.0,
+            vmax=100.0,
+            cmap="RdYlGn_r",
+        )
+        valid_levels = [
+            level
+            for level in (30.0, 50.0, 70.0)
+            if result.risks.min() < level < result.risks.max()
+        ]
+        if valid_levels:
+            contours = ax.contour(
+                result.x_values,
+                result.y_values,
+                result.risks,
+                levels=valid_levels,
+                colors="black",
+                linewidths=0.8,
+            )
+            ax.clabel(contours, inline=True, fontsize=8)
+        ax.set(
+            xlabel=labels.get(result.x_variable, result.x_variable),
+            ylabel=labels.get(result.y_variable, result.y_variable),
+            title=result.name,
+        )
+    for ax in list(axes.flat)[len(results):]:
+        ax.set_visible(False)
+    fig.suptitle(title, fontsize=14)
+    fig.subplots_adjust(left=0.05, right=0.91, bottom=0.12, top=0.82, wspace=0.20)
+    if image is not None:
+        colorbar_axis = fig.add_axes((0.93, 0.17, 0.012, 0.60))
+        fig.colorbar(image, cax=colorbar_axis, label="Risco (0-100)")
+    _save(fig, path, tight_layout=False)
+
+
+def plot_social_scenarios(results: Sequence[HeatmapResult], path: str | Path) -> None:
+    """Varia capital educacional e representa os estados binarios como linhas."""
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    colors = sns.color_palette("tab10", 8)
+    line_index = 0
+    for result in results:
+        scholarship = "sim" if result.fixed_values["scholarship"] else "não"
+        tuition_late = "sim" if result.fixed_values["tuition_late"] else "não"
+        for debtor_index, debtor_value in enumerate(result.y_values):
+            debtor = "sim" if debtor_value else "não"
+            ax.plot(
+                result.x_values,
+                result.risks[debtor_index],
+                color=colors[line_index],
+                marker=("o", "s", "^", "D", "v", "P", "X", "*")[line_index],
+                markevery=3,
+                linewidth=2,
+                label=f"Bolsa {scholarship} · Atrasada {tuition_late} · Devedor {debtor}",
+            )
+            line_index += 1
+    ax.set(
+        xlabel="Capital educacional familiar",
+        ylabel="Risco (0-100)",
+        ylim=(0, 100),
+        title="Sistema social — risco por capital educacional",
+    )
+    ax.grid(alpha=0.2)
+    ax.legend(title="Combinações binárias", bbox_to_anchor=(1.02, 1.0), loc="upper left")
+    fig.subplots_adjust(left=0.08, right=0.68, bottom=0.12, top=0.90)
+    _save(fig, path, tight_layout=False)
+
+
+def plot_demographic_scenarios(results: Sequence[HeatmapResult], path: str | Path) -> None:
+    """Varia idade e representa todos os estados binarios como linhas."""
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    colors = sns.color_palette("tab10", 8)
+    line_index = 0
+    for result in results:
+        attendance = "noturno" if result.fixed_values["noturno"] else "diurno"
+        nationality = "internacional" if result.fixed_values["internacional"] else "nacional"
+        for displaced_index, displaced_value in enumerate(result.y_values):
+            displaced = "deslocado" if displaced_value else "não deslocado"
+            ax.plot(
+                result.x_values,
+                result.risks[displaced_index],
+                color=colors[line_index],
+                marker=("o", "s", "^", "D", "v", "P", "X", "*")[line_index],
+                markevery=3,
+                linewidth=2,
+                label=f"{attendance.title()} · {nationality.title()} · {displaced.title()}",
+            )
+            line_index += 1
+    ax.set(
+        xlabel="Idade",
+        ylabel="Risco (0-100)",
+        ylim=(0, 100),
+        title="Sistema demográfico — risco por idade",
+    )
+    ax.grid(alpha=0.2)
+    ax.legend(title="Combinações binárias", bbox_to_anchor=(1.02, 1.0), loc="upper left")
+    fig.subplots_adjust(left=0.08, right=0.68, bottom=0.12, top=0.90)
+    _save(fig, path, tight_layout=False)
+
+
 def generate_heatmaps(pipeline: FuzzyPipeline, train: pd.DataFrame, output_dir: str | Path) -> Mapping[str, HeatmapResult]:
     destination = Path(output_dir)
-    train_risks = pipeline.predict(train)
-    specifications = {
-        "academico": (
-            pipeline.academic_model, "nota_academica", "aprovadas",
-            {"sem_avaliacao": float(train["sem_avaliacao"].median())},
-        ),
-        "social": (
-            pipeline.social_model, "debtor", "tuition_late",
-            {"scholarship": float(train["scholarship"].mode().iloc[0]), "capital_educacional": float(train["capital_educacional"].median())},
-        ),
-        "demografico": (
-            pipeline.demographic_model, "idade", "deslocado",
-            {"noturno": float(train["noturno"].mode().iloc[0]), "internacional": float(train["internacional"].mode().iloc[0])},
-        ),
-        "final": (
-            pipeline.final_model, "risco_academico", "risco_social",
-            {"risco_demografico": float(np.median(train_risks.risco_demografico))},
-        ),
-    }
     labels = {variable.name: variable.label for model in pipeline.models.values() for variable in model.variables}
     results: dict[str, HeatmapResult] = {}
-    for name, (model, x_variable, y_variable, fixed_values) in specifications.items():
-        result = build_heatmap(model, name=f"Superficie do sistema {name}", x_variable=x_variable, y_variable=y_variable, fixed_values=fixed_values)
-        results[name] = result
-        plot_heatmap(result, labels, destination / f"heatmap_{name}.png")
+
+    academic_results: list[HeatmapResult] = []
+    for level, value in (("Baixa", 0.0), ("Media", 1.0), ("Alta", 3.0)):
+        result = build_heatmap(
+            pipeline.academic_model,
+            name=f"Sem avaliacao: {level.lower()} ({value:g})",
+            x_variable="nota_academica",
+            y_variable="aprovadas",
+            fixed_values={"sem_avaliacao": value},
+        )
+        results[f"academico_{level.lower()}"] = result
+        academic_results.append(result)
+    plot_heatmap_facets(
+        academic_results,
+        labels,
+        destination / "heatmap_academico.png",
+        columns=3,
+        title="Sistema acadêmico — três níveis de unidades sem avaliação",
+    )
+
+    social_results: list[HeatmapResult] = []
+    for scholarship, tuition_late in ((0.0, 0.0), (0.0, 1.0), (1.0, 0.0), (1.0, 1.0)):
+        result = build_heatmap(
+            pipeline.social_model,
+            name="Cenário social",
+            x_variable="capital_educacional",
+            y_variable="debtor",
+            fixed_values={"scholarship": scholarship, "tuition_late": tuition_late},
+            resolution=20,
+            y_resolution=2,
+        )
+        key = f"social_{'com' if scholarship else 'sem'}_bolsa_mensalidade_{'atrasada' if tuition_late else 'em_dia'}"
+        results[key] = result
+        social_results.append(result)
+    plot_social_scenarios(social_results, destination / "heatmap_social.png")
+
+    demographic_results: list[HeatmapResult] = []
+    for evening, international in ((0.0, 0.0), (0.0, 1.0), (1.0, 0.0), (1.0, 1.0)):
+        result = build_heatmap(
+            pipeline.demographic_model,
+            name=f"{'Noturno' if evening else 'Diurno'}; {'internacional' if international else 'nacional'}",
+            x_variable="idade",
+            y_variable="deslocado",
+            fixed_values={"noturno": evening, "internacional": international},
+            resolution=20,
+            y_resolution=2,
+        )
+        key = f"demografico_{'noturno' if evening else 'diurno'}_{'internacional' if international else 'nacional'}"
+        results[key] = result
+        demographic_results.append(result)
+    plot_demographic_scenarios(demographic_results, destination / "curvas_demografico.png")
+
+    final_results: list[HeatmapResult] = []
+    for level, value in (("Baixo", 20.0), ("Medio", 50.0), ("Alto", 80.0)):
+        result = build_heatmap(
+            pipeline.final_model,
+            name=f"Risco demografico: {level.lower()} ({value:g})",
+            x_variable="risco_academico",
+            y_variable="risco_social",
+            fixed_values={"risco_demografico": value},
+        )
+        results[f"final_{level.lower()}"] = result
+        final_results.append(result)
+    plot_heatmap_facets(
+        final_results,
+        labels,
+        destination / "heatmap_final.png",
+        columns=3,
+        title="Sistema final — três níveis de risco demográfico",
+    )
     return results
 
 

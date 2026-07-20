@@ -172,5 +172,6 @@ def export_experiment(result: ExperimentResult, output_dir: str | Path) -> None:
         ("confusion_matrix_test.png", "confusion_matrix.png"),
         ("risk_distribution_test.png", "risk_distribution.png"),
         ("validation_f2_threshold.png", "threshold_sweep.png"),
+        ("curvas_demografico.png", "heatmap_demografico.png"),
     ):
         shutil.copyfile(destination / current_name, destination / legacy_name)
