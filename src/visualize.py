@@ -50,14 +50,27 @@ def plot_system_diagram(path: str | Path) -> None:
         "Risco de evasao\n0-100": (0.86, 0.50),
     }
     colors = {"Sistema final": "#f4a261", "Risco de evasao\n0-100": "#e76f51"}
+
+    # --- setas primeiro (atras dos blocos) ---
+    for source in ("Academico", "Social/financeiro", "Demografico"):
+        ax.annotate(
+            "", xy=positions["Sistema final"], xytext=positions[source],
+            arrowprops={"arrowstyle": "->", "lw": 1.8, "shrinkA": 12, "shrinkB": 12},
+            zorder=1,
+        )
+    ax.annotate(
+        "", xy=positions["Risco de evasao\n0-100"], xytext=positions["Sistema final"],
+        arrowprops={"arrowstyle": "->", "lw": 1.8, "shrinkA": 12, "shrinkB": 12},
+        zorder=1,
+    )
+
+    # --- blocos por cima ---
     for label, (x, y) in positions.items():
         ax.text(
             x, y, label, ha="center", va="center", fontsize=11,
             bbox={"boxstyle": "round,pad=0.6", "facecolor": colors.get(label, "#d9ed92"), "edgecolor": "#264653"},
+            zorder=2,
         )
-    for source in ("Academico", "Social/financeiro", "Demografico"):
-        ax.annotate("", xy=positions["Sistema final"], xytext=positions[source], arrowprops={"arrowstyle": "->", "lw": 1.8})
-    ax.annotate("", xy=positions["Risco de evasao\n0-100"], xytext=positions["Sistema final"], arrowprops={"arrowstyle": "->", "lw": 1.8})
     ax.set_title("Arquitetura hierarquica do sistema de inferencia fuzzy", fontsize=14)
     _save(fig, path)
 
